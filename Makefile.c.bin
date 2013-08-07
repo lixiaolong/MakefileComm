@@ -1,9 +1,9 @@
 # may need change
 TARGET = my_app
 CC = gcc
-INCLUDES = -I./
-LIBS = -L./
-CCFLAGS = -g -Wall -O0
+# CFLAGS += -g -D__HAVE_SOME_DEFINE
+CFLAGS += -g
+LDFLAGS += -I./ -L./
 
 # for c
 SRCS = $(wildcard *.c)
@@ -11,10 +11,10 @@ OBJS = $(SRCS:.c = .o)
 
 ###################
 $(TARGET) : $(OBJS)
-	$(CC) $^ -o $@ $(INCLUDES) $(LIBS)
+	$(CC) $(CFLAGS) -o $@ $(LDFLAGS) $(OBJS)
 
 %.o : %.c
-	$(CC) -c $< $(CCFLAGS)
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	rm *.o
